@@ -7,7 +7,7 @@ const houseSchema = new mongoose.Schema({
     },
     type: {
         type: String,
-        enum: ["Apartment, Villa, House"],
+        enum: ["Apartment", "Villa", "House"],
         required: true
     },
     year: {

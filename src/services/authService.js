@@ -5,10 +5,10 @@ const jwt = require(`jwt-promisify`)
 const {jwtPrivateKey} = require(`../config/commonConst`)
 const saltRounds = 10
 
-exports.register = async (username, password, adress) => {
+exports.register = async (name, username, password) => {
     try {
         const hasedPassword = await bcrypt.hash(password, saltRounds)
-        const user = await User.create({ username, password: hasedPassword, adress })
+        const user = await User.create({name, username, password: hasedPassword})
         return user
     } catch (error) {
         throw error

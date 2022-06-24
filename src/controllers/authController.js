@@ -8,13 +8,14 @@ authController.get(`/register`, isGuest, (req, res) => {
     res.render("auth/register")
 })
 
-authController.post(`/register`, isGuest, async (req, res) => {
-    const { username, password, repeatPassword, adress } = req.body
+authController.post(`/register`, async (req, res) => {
+    const {name,username, password, repeatPassword} = req.body
+    
     if (password !== repeatPassword) {
         return res.render(`auth/register`, { error: "Password doesnt match" })
     }
     try {
-        const user = await authService.register(username, password, adress)
+        const user = await authService.register(name, username, password)
         res.render(`home`)
     } catch (error) {
         res.render(`auth/register`, { error })

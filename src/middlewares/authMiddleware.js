@@ -4,7 +4,8 @@ const { jwtPrivateKey } = require(`../config/commonConst`)
 exports.auth = async (req, res, next) => {
 
     const sessionCookie = req.cookies.session
-
+    res.locals.isUser = false
+    res.locals.isGuest = false
 
     if (sessionCookie) {
        const user = await jwt.verify(sessionCookie, jwtPrivateKey)
@@ -17,6 +18,8 @@ exports.auth = async (req, res, next) => {
         } else {
            return res.redirect(`/404`)
         }
+    } else {
+        res.locals.isGuest = true
     }
 
     next()

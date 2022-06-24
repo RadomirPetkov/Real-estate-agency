@@ -12,6 +12,7 @@ exports.auth = async (req, res, next) => {
         if (user) {
             req.user = user
             res.locals.isUser = true
+            res.locals.user = user
 
         } else {
             res.redirect(`/404`)

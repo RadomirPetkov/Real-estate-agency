@@ -16,7 +16,7 @@ exports.register = async (name, username, password) => {
 }
 
 exports.login = async (username, password) =>{
-    const user = await User.findOne({username})
+    const user = await User.findOne({username}).lean()
     if (!user) {
         throw (`Invalid user`)
 

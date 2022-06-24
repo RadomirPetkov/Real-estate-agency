@@ -9,8 +9,12 @@ authController.get(`/register`, isGuest, (req, res) => {
 })
 
 authController.post(`/register`, async (req, res) => {
-    const {name,username, password, repeatPassword} = req.body
-    
+    const { name, username, password, repeatPassword } = req.body
+    const [firstname, lastname] = name.split(` `)
+    if (!firstname || !lastname) {
+        return res.render(`auth/register`, { error:"Your full name is incorect"})
+    }
+
     if (password !== repeatPassword) {
         return res.render(`auth/register`, { error: "Password doesnt match" })
     }
